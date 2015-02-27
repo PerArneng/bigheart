@@ -2,7 +2,7 @@
     <iq:application entry="BigHeartFieldApp" id="B1E18549B0E640CBB8378E6C460CEB50" launcherIcon="LauncherIcon" name="AppName" type="datafield">
 
         <iq:products>
-            <iq:product id="fr920xt" partNumber="006-B1765-00"/>
+            <iq:product filename="006-B1765-00/006-B1765-00.prg" id="fr920xt" partNumber="006-B1765-00"/>
         </iq:products>
 
         <iq:permissions/>

@@ -13,9 +13,9 @@ class BigHeartField extends WatchUi.DataField {
   }
   
   function onUpdate(dc) {
-  	dc.setColor(Graphics.COLOR_BLUE, Graphics.COLOR_WHITE);
+  	dc.setColor(Graphics.COLOR_BLACK, Graphics.COLOR_WHITE);
   	dc.clear();
-  	dc.setColor(Graphics.COLOR_BLUE, Graphics.COLOR_BLUE);
+  	dc.setColor(Graphics.COLOR_BLACK, Graphics.COLOR_WHITE);
   	
   	var textToDraw = "000";
   	if (nfo.currentHeartRate !=null) {

@@ -5,9 +5,6 @@ import sys
 import argparse
 
 
-# path to the SDK directory; *NOT* the bin directory
-CONNECT_IQ_SDK_DIR = r'/Users/pure/Software/connectiq-sdk-mac-1.0.0'
-
 script_extension = ''
 if os.name == 'nt':
     script_extension = '.bat'
@@ -51,9 +48,13 @@ if __name__ == '__main__':
     parser.add_argument('--no-sim', action='store_true', help="Don't run the simulator after compiling.")
     parser.add_argument('-r', '--release', action='store_true')
     parser.add_argument('-p', '--package', action='store_true', help='Run the packager')
+    parser.add_argument('-n', '--name', default=None, required=True, help='Run the packager')
 
     args = parser.parse_args()
-    
+
+    PROGRAM_NAME = args.name
+    OUTPUT_FILENAME = os.path.join(BIN_DIR, PROGRAM_NAME + '.prg')
+
     print "Program Name: %s" % (PROGRAM_NAME)
 
     resources = [os.path.relpath(path) for path in glob_tree(RESOURCE_DIR, '*.xml')]
