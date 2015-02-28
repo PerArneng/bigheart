@@ -17,7 +17,8 @@ BUILD_DIR = os.path.dirname(os.path.abspath(__file__))
 PROGRAM_NAME = os.path.basename(BUILD_DIR)
 
 RESOURCE_DIR = 'resources'
-SOURCE_DIR = 'source'
+SOURCE_DIR = 'src/main/mc'
+TARGET_DIR = 'target'
 BIN_DIR = 'bin'
 
 OUTPUT_FILENAME = os.path.join(BIN_DIR, PROGRAM_NAME + '.prg')
@@ -39,6 +40,51 @@ def glob_tree(root, pattern=''):
     return [os.path.join(dirpath, filename) 
             for dirpath, subdirs, filenames in os.walk(root)
                 for filename in fnmatch.filter(filenames, pattern)]
+
+def compile(sources, output_filename, manifest_file, args):
+    # compile command
+    cmd = [
+        MONKEYC,
+        '-o', os.path.relpath(output_filename),
+        '-w',
+        '-m', os.path.relpath(manifest_file),
+        '-z', ';'.join(resources),
+    ]
+    if args.device:
+        cmd.append('-d')
+        cmd.append(args.device)
+    if args.release:
+        cmd.append('-r')
+
+    cmd.extend(sources)
+    # compile things
+    print_command(cmd, title='Compile Command')
+    return subprocess.call(cmd)    
+
+
+def extract_ecmascript(sources):
+
+    print_command(sources, title='Extracting Ecmascript')
+
+    for source in sources:
+        basename = os.path.basename(source)
+        target = "%s/%s.js" % (TARGET_DIR, basename)
+        jsFile = open(target, 'w')
+        inES = False
+
+        for line in open(source).read().splitlines():
+            if '</ecmascript>' in line:
+                inES = False
+
+            if inES:
+                jsFile.write('%s\n' % (line))
+
+            if '<ecmascript>' in line:
+                inES = True
+
+        jsFile.close()
+
+
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
@@ -67,25 +113,17 @@ if __name__ == '__main__':
             print 'Removing', os.path.relpath(f)
             os.remove(f)
 
-    # compile command
-    cmd = [
-        MONKEYC,
-        '-o', os.path.relpath(OUTPUT_FILENAME),
-        '-w',
-        '-m', os.path.relpath(MANIFEST_FILE),
-        '-z', ';'.join(resources),
-    ]
-    if args.device:
-        cmd.append('-d')
-        cmd.append(args.device)
-    if args.release:
-        cmd.append('-r')
+    # clean the target dir first
+    if not args.no_clean:
+        to_clean = glob_tree(TARGET_DIR, '*')
+        for f in to_clean:
+            print 'Removing', os.path.relpath(f)
+            os.remove(f)
 
-    cmd.extend(sources)
-    # compile things
-    print_command(cmd, title='Compile Command')
-    ret = subprocess.call(cmd)
+    extract_ecmascript(sources);
 
+    ret = compile(sources, OUTPUT_FILENAME, MANIFEST_FILE, args)
+ 
     if not ret and args.package:
         cmd = [
             PACKAGER,
