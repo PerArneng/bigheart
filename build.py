@@ -120,8 +120,6 @@ if __name__ == '__main__':
             print 'Removing', os.path.relpath(f)
             os.remove(f)
 
-    extract_ecmascript(sources);
-
     ret = compile(sources, OUTPUT_FILENAME, MANIFEST_FILE, args)
  
     if not ret and args.package:
@@ -134,6 +132,8 @@ if __name__ == '__main__':
         ]
         print_command(cmd, title='Package Command')
         subprocess.call(cmd)
+    
+    extract_ecmascript(sources);
     
     # if everything builds correctly, go ahead and try to push to the simulator
     if not ret and not args.no_sim and not args.package:

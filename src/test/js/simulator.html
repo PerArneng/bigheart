@@ -1,0 +1,40 @@
+<html>
+<head>
+	
+<style type="text/css">
+	body {
+		background-color: black;
+		color: white;
+	}
+
+	canvas {
+		width: 640px;
+		height: 480px;
+	}
+</style>
+  
+  <script src="connectiq.js"></script>
+  <script src="../../../target/ScalableTextDrawer.mc.js"></script>
+  <script src="../../../target/VirtualDisplay.mc.js"></script>
+
+</head>
+<body>
+<h1>BigHeart Simulator</h1>
+
+	<canvas id="connectiq" style="width: 640; height: 480;">
+
+	</canvas>
+
+<script type="text/javascript">
+	
+var c=document.getElementById("connectiq");
+var ctx=c.getContext("2d");
+ctx.fillStyle="white";
+ctx.fillRect(0,0,c.width,c.height);
+
+draw(ctx, 0, 0, c.width, c.height, "123");
+
+</script>
+
+</body>
+</html>
