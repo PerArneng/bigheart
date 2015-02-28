@@ -1,18 +1,22 @@
 
 QUnit.test( "ScalableTextDrawer::indexOf happy", function( assert ) {
-	assert.equal(indexOf(new ciq.String("123"), new ciq.String("2")), 1, "Expected index 1")
+	assert.equal(indexOf("123", "2"), 1, "Expected index 1")
+});
+
+QUnit.test( "ScalableTextDrawer::indexOf happy 2", function( assert ) {
+	assert.equal(indexOf("123", "3"), 2, "Expected index 2")
 });
 
 QUnit.test( "ScalableTextDrawer::indexOf not found", function( assert ) {
-	assert.equal(indexOf(new ciq.String("123"), new ciq.String("X")), -1, "Expected index -1")
+	assert.equal(indexOf("123", "X"), -1, "Expected index -1")
 });
 
 QUnit.test( "ScalableTextDrawer::indexOf haystack null", function( assert ) {
-	assert.equal(indexOf(null, new ciq.String("X")), -1, "Expected index -1")
+	assert.equal(indexOf(null, "X"), -1, "Expected index -1")
 });
 
 QUnit.test( "ScalableTextDrawer::indexOf needle null", function( assert ) {
-	assert.equal(indexOf(new ciq.String("X"), null), -1, "Expected index -1")
+	assert.equal(indexOf("X", null), -1, "Expected index -1")
 });
 
 QUnit.test( "ScalableTextDrawer::arrayCopy happy", function( assert ) {
