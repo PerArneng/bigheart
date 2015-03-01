@@ -18,6 +18,9 @@ PROGRAM_NAME = os.path.basename(BUILD_DIR)
 
 RESOURCE_DIR = 'resources'
 SOURCE_DIR = 'src/main/mc'
+ES6_DIR = 'src/main/js'
+TEST_DIR = 'src/test/js'
+
 TARGET_DIR = 'target'
 BIN_DIR = 'bin'
 
@@ -62,29 +65,26 @@ def compile(sources, output_filename, manifest_file, args):
     return subprocess.call(cmd)    
 
 
-def extract_ecmascript(sources):
+def convert_to_monkeyc(sources):
 
-    print_command(sources, title='Extracting Ecmascript')
+    print_command(sources, title='Converting Ecmascript 6 to Monkey C')
 
     for source in sources:
         basename = os.path.basename(source)
-        target = "%s/%s.js" % (TARGET_DIR, basename)
-        jsFile = open(target, 'w')
-        inES = False
+        basename = basename.replace('.js', '.mc')
+        target = "%s/%s" % (TARGET_DIR, basename)
+        cmd = ['python', 'es6_to_monkeyc.py', '-i', source, '-o', target]
+        subprocess.call(cmd)    
 
-        for line in open(source).read().splitlines():
-            if '</ecmascript>' in line:
-                inES = False
+def convert_to_es5(sources):
 
-            if inES:
-                jsFile.write('%s\n' % (line))
+    print_command(sources, title='Converting Ecmascript 6 to Ecmascript 5')
 
-            if '<ecmascript>' in line:
-                inES = True
-
-        jsFile.close()
-
-
+    for source in sources:
+        basename = os.path.basename(source)
+        target = "%s/%s" % (TARGET_DIR, basename)
+        cmd = ['babel', source, '-o', target]
+        subprocess.call(cmd) 
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
@@ -104,7 +104,7 @@ if __name__ == '__main__':
     print "Program Name: %s" % (PROGRAM_NAME)
 
     resources = [os.path.relpath(path) for path in glob_tree(RESOURCE_DIR, '*.xml')]
-    sources = [os.path.relpath(path) for path in glob_tree(SOURCE_DIR, '*.mc')]
+    sources = [os.path.relpath(path) for path in glob_tree(ES6_DIR, '*.js')]
 
     # clean the bin dir first
     if not args.no_clean:
@@ -120,6 +120,15 @@ if __name__ == '__main__':
             print 'Removing', os.path.relpath(f)
             os.remove(f)
 
+    convert_to_monkeyc(sources)
+    convert_to_es5(sources)
+
+    test_sources = [os.path.relpath(path) for path in glob_tree(TEST_DIR, '*.js')]
+    convert_to_es5(test_sources)
+
+
+    sources = [os.path.relpath(path) for path in glob_tree(TARGET_DIR, '*.mc')]
+
     ret = compile(sources, OUTPUT_FILENAME, MANIFEST_FILE, args)
  
     if not ret and args.package:
@@ -132,8 +141,6 @@ if __name__ == '__main__':
         ]
         print_command(cmd, title='Package Command')
         subprocess.call(cmd)
-    
-    extract_ecmascript(sources);
     
     # if everything builds correctly, go ahead and try to push to the simulator
     if not ret and not args.no_sim and not args.package:
