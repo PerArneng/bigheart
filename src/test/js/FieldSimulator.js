@@ -10,7 +10,7 @@ class FieldSimulator {
 
 	update() {
 		this.field.compute("ge");
-		this.field.draw(this.canvas);
+		this.field.onUpdate(this.dc);
 	}
 
 }

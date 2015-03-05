@@ -18,6 +18,7 @@
 
   <script src="../../../target/ScalableTextDrawer.js"></script>
   <script src="../../../target/VirtualDisplay.js"></script>
+  <script src="../../../target/BigHeartField.js"></script>
 
 </head>
 <body>
@@ -29,12 +30,10 @@
 
 <script type="text/javascript">
 	
-var c=document.getElementById("connectiq");
-var ctx=c.getContext("2d");
-ctx.fillStyle="white";
-ctx.fillRect(0,0,c.width,c.height);
-
-draw(ctx, 0, 0, c.width, c.height, "123");
+var canvas = document.getElementById("connectiq");
+var field = new BigHeartField();
+var fieldSimulator = new FieldSimulator(canvas, field);
+fieldSimulator.update();
 
 </script>
 

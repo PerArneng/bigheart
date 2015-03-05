@@ -12,7 +12,7 @@ class BigHeartField /*mc:extends WatchUi.DataField*/ {
   }
 
   /*mc:function*/ compute(info) {
-  	nfo = info;
+  	this.nfo = info;
   }
   
   /*mc:function*/ onUpdate(dc) {
