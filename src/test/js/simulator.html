@@ -30,9 +30,9 @@
 
 <script type="text/javascript">
 	
-var canvas = document.getElementById("connectiq");
+var dc2 = document.getElementById("connectiq").getContext("2d");
 var field = new BigHeartField();
-var fieldSimulator = new FieldSimulator(canvas, field);
+var fieldSimulator = new FieldSimulator(dc2, field);
 fieldSimulator.update();
 
 </script>

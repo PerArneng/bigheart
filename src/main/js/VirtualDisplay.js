@@ -11,7 +11,7 @@ class VirtualDisplay {
 
 	/*mc:function*/ translatePixel(x, y, width, height, targetWidth, targetHeight, targetXOffset, targetYOffset) {
 
-		var dimensions = pixelDimensions(width, height, targetWidth, targetHeight);
+		var dimensions = this.pixelDimensions(width, height, targetWidth, targetHeight);
 
 		var pixelWidth = dimensions[0];
 		var pixelHeight = dimensions[1];

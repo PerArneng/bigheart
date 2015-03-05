@@ -21,9 +21,9 @@ class BigHeartField /*mc:extends WatchUi.DataField*/ {
   	dc.setColor(Graphics.COLOR_BLACK, Graphics.COLOR_WHITE);
   	
   	var textToDraw = "000";
-  	if (nfo.currentHeartRate !=null) {
+  	if (this.nfo.currentHeartRate != null) {
   		textToDraw = Lang.format("$1$", [nfo.currentHeartRate]);
   	}
-  	std.draw(dc, 2, 2, dc.getWidth()-2, dc.getHeight()-2, textToDraw);
+  	this.std.draw(dc, 2, 2, dc.getWidth()-2, dc.getHeight()-2, textToDraw);
   }
 }

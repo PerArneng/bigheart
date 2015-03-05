@@ -2,8 +2,8 @@
 
 class FieldSimulator {
 
-	constructor(canvas, field) {
-		this.dc = canvas;
+	constructor(drawingContext2d, field) {
+		this.dc = new Dc(drawingContext2d);
 		this.field = field;
 	}
 

@@ -177,17 +177,17 @@ class ScalableTextDrawer {
 						
 		var vdisp = new VirtualDisplay();
 
-		var currentChar = new [12];
+		var currentChar = new Array(12); //mc:var currentChar = new [12];
 
 		var pxDimensions = vdisp.pixelDimensions(virtWidth, virtHeight, width, height);
 		var pixelWidth = pxDimensions[0];
 		var pixelHeight = pxDimensions[1];
 
-		for (var i=0;i<text.length();i++) {
+		for (var i=0;i<text.length/*mc:()*/;i++) {
 			var chr = text.substring(i, i+1);
-			var dispCharOffset = getOffset(_chars, chr) * 12;
+			var dispCharOffset = this.getOffset(this._chars, chr) * 12;
 
-			arrayCopy(_font, dispCharOffset, 12, currentChar);
+			this.arrayCopy(this._font, dispCharOffset, 12, currentChar);
 
 			for (var n=0;n<12;n++) {
 				var type = currentChar[n];
