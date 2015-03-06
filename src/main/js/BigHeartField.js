@@ -20,10 +20,13 @@ class BigHeartField /*mc:extends WatchUi.DataField*/ {
   	dc.clear();
   	dc.setColor(Graphics.COLOR_BLACK, Graphics.COLOR_WHITE);
   	
-  	var textToDraw = "000";
+  	var textToDraw = "123";
   	if (this.nfo.currentHeartRate != null) {
   		textToDraw = Lang.format("$1$", [nfo.currentHeartRate]);
   	}
-  	this.std.draw(dc, 2, 2, dc.getWidth()-2, dc.getHeight()-2, textToDraw);
+
+  	var bounds = new Rectangle(2, 2, dc.getWidth()-2, dc.getHeight()-2);
+
+  	this.std.draw(dc, bounds, textToDraw);
   }
 }

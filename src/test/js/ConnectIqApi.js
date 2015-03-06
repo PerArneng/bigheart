@@ -32,7 +32,7 @@ class Dc {
 	}
 
 	fillRectangle(x, y, width, height) {
-		this.fillStyle = this.fg;
+		this.dc2d.fillStyle = this.fg;
 		this.dc2d.fillRect(x, y, width, height);
 	}
 

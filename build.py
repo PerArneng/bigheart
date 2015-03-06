@@ -83,7 +83,7 @@ def convert_to_es5(sources):
     for source in sources:
         basename = os.path.basename(source)
         target = "%s/%s" % (TARGET_DIR, basename)
-        cmd = ['babel', source, '-o', target]
+        cmd = ['babel', '-s', source, '-o', target]
         subprocess.call(cmd) 
 
 if __name__ == '__main__':

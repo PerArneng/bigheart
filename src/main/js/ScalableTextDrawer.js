@@ -170,37 +170,37 @@ class ScalableTextDrawer {
 	}
 
 	
-	/*mc:function*/ draw(dctx, xoff, yoff, width, height, text) {
+	/*mc:function*/ draw(dctx, bounds, text) {
 				
-		var virtWidth = text.length*3+1;
-		var virtHeight = 5;
+
+		var charDim = new Dimension(3, 5);
+		var bytesPerChar = 12;		
+
+		var virtDim = new Dimension(text.length * charDim.width + 1, charDim.height);		
+		var targetDim = bounds.getDimension();
 						
 		var vdisp = new VirtualDisplay();
 
-		var currentChar = new Array(12); //mc:var currentChar = new [12];
+		var currentChar = new Array(bytesPerChar); //mc:var currentChar = new [bytesPerChar];
 
-		var pxDimensions = vdisp.pixelDimensions(virtWidth, virtHeight, width, height);
-		var pixelWidth = pxDimensions[0];
-		var pixelHeight = pxDimensions[1];
+		var pxDim = vdisp.pixelDimensions(virtDim, targetDim);
 
 		for (var i=0;i<text.length/*mc:()*/;i++) {
-			var chr = text.substring(i, i+1);
-			var dispCharOffset = this.getOffset(this._chars, chr) * 12;
+			var chr = text.substring(i, i + 1);
+			var dispCharOffset = this.getOffset(this._chars, chr) * bytesPerChar;
 
-			this.arrayCopy(this._font, dispCharOffset, 12, currentChar);
+			this.arrayCopy(this._font, dispCharOffset, bytesPerChar, currentChar);
 
-			for (var n=0;n<12;n++) {
+			for (var n=0;n<bytesPerChar;n++) {
 				var type = currentChar[n];
-				var pos = vdisp.indexToPos(n, 3, 12);
-				var x = pos[0] + ((n)*(3+1));
-				var y = pos[1];
+				var charPos = vdisp.indexToPos(n, charDim);
+				var pos = new Point(charPos.x + (i * (3 + 1)), charPos.y);
 
-				var targetPos = vdisp.translatePixel(x, y, virtWidth, virtHeight, width, height, xoff, yoff);
-				var targetX = targetPos[0];
-				var targetY = targetPos[1];
+				var targetPos = vdisp.translatePixel(pos, virtDim, bounds);
+
 				//var poly = createPixelPolygon(targetX,targetY, pixelWidth, pixelHeight , type);
 				if (type > 0) {
-					dctx.fillRectangle(targetX, targetY, pixelWidth, pixelHeight);
+					dctx.fillRectangle(targetPos.x, targetPos.y, pxDim.width, pxDim.height);
 					//dctx.fillPolygon(poly);
 				}
 			}
