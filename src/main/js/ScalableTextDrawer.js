@@ -174,7 +174,7 @@ class ScalableTextDrawer {
 				
 
 		var charDim = new Dimension(3, 5);
-		var bytesPerChar = 12;		
+		var bytesPerChar = 15;		
 
 		var virtDim = new Dimension(text.length * charDim.width + 1, charDim.height);		
 		var targetDim = bounds.getDimension();

@@ -15,7 +15,7 @@
   
   <script src="../../../target/ConnectIqApi.js"></script>
   <script src="../../../target/FieldSimulator.js"></script>
-  
+
   <script src="../../../target/Rectangle.js"></script>
   <script src="../../../target/Point.js"></script>
   <script src="../../../target/Dimension.js"></script>
@@ -28,7 +28,7 @@
 <body>
 <h1>BigHeart Simulator</h1>
 
-	<canvas id="connectiq" style="width: 640; height: 480;">
+	<canvas id="connectiq" width="640" height="480">
 
 	</canvas>
 
@@ -36,7 +36,7 @@
 	
 var dc2 = document.getElementById("connectiq").getContext("2d");
 var field = new BigHeartField();
-var fieldSimulator = new FieldSimulator(dc2, field);
+var fieldSimulator = new FieldSimulator(dc2, field, new Rectangle( 0, 0, 640, 480));
 fieldSimulator.update();
 
 </script>

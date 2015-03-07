@@ -80,7 +80,16 @@ QUnit.test( "VirtualDisplay::indexToPos happy", function( assert ) {
 	assert.equal(pos.x, 0, "Expected x 0")
 	assert.equal(pos.y, 0, "Expected y 0")
 
-	var pos = vdisp.indexToPos(7, new Dimension(3, 4));
-	assert.equal(pos.x, 1, "Expected x 1")
-	assert.equal(pos.y, 2, "Expected y 2")
+	var pos = vdisp.indexToPos(3, new Dimension(3, 4));
+	assert.equal(pos.x, 0, "Expected x 1")
+	assert.equal(pos.y, 1, "Expected y 2")
+});
+
+QUnit.test( "VirtualDisplay::indexToPos happy", function( assert ) {
+	var vdisp = new VirtualDisplay();
+
+	var pos = vdisp.indexToPos(14, new Dimension(3, 5));
+	assert.equal(pos.x, 2, "Expected x 2")
+	assert.equal(pos.y, 4, "Expected y 4")
+
 });

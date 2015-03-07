@@ -20,7 +20,7 @@ class BigHeartField /*mc:extends WatchUi.DataField*/ {
   	dc.clear();
   	dc.setColor(Graphics.COLOR_BLACK, Graphics.COLOR_WHITE);
   	
-  	var textToDraw = "123";
+  	var textToDraw = "451";
   	if (this.nfo.currentHeartRate != null) {
   		textToDraw = Lang.format("$1$", [nfo.currentHeartRate]);
   	}
