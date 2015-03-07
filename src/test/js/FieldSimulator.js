@@ -18,6 +18,7 @@ class FieldSimulator {
 			this.drawingContext2d.canvas.height);
 
 		var info = new Info();
+		info.currentHeartRate = this.random();
 
 		this.field.compute(info);
 		this.field.onUpdate(this.dc);
@@ -31,6 +32,15 @@ class FieldSimulator {
 		this.drawingContext2d.stroke();
 		*/
 
+	}
+
+	random() {
+
+		var nr = "";
+		for (var i=0;i<3;i++) {
+			nr = nr + Math.floor((Math.random() * 9) + 1)
+		}
+		return parseInt(nr);
 	}
 
 }
