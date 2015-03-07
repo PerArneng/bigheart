@@ -1,4 +1,13 @@
 
+class Info {
+
+	constructor() {
+		this.currentHeartRate = 123;
+	}
+
+}
+
+
 class Graphics {
 
 }

@@ -22,10 +22,10 @@ class BigHeartField /*mc:extends WatchUi.DataField*/ {
   	
   	var textToDraw = "451";
   	if (this.nfo.currentHeartRate != null) {
-  		textToDraw = Lang.format("$1$", [nfo.currentHeartRate]);
+  		textToDraw = "" + this.nfo.currentHeartRate; //mc:textToDraw = Lang.format("$1$", [nfo.currentHeartRate]);
   	}
 
-  	var bounds = new Rectangle(2, 2, dc.getWidth()-2, dc.getHeight()-2);
+  	var bounds = new Rectangle(4, 4, dc.getWidth()-8, dc.getHeight()-8);
 
   	this.std.draw(dc, bounds, textToDraw);
   }

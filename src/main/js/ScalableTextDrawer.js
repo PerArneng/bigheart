@@ -176,7 +176,8 @@ class ScalableTextDrawer {
 		var charDim = new Dimension(3, 5);
 		var bytesPerChar = 15;		
 
-		var virtDim = new Dimension(text.length * charDim.width + 1, charDim.height);		
+		var virtDim = new Dimension(text.length * charDim.width + (text.length - 1), 
+									charDim.height);		
 		var targetDim = bounds.getDimension();
 						
 		var vdisp = new VirtualDisplay();
@@ -194,7 +195,7 @@ class ScalableTextDrawer {
 			for (var n=0;n<bytesPerChar;n++) {
 				var type = currentChar[n];
 				var charPos = vdisp.indexToPos(n, charDim);
-				var pos = new Point(charPos.x + (i * (3 + 1)), charPos.y);
+				var pos = new Point(charPos.x + (i * (charDim.width + 1)), charPos.y);
 
 				var targetPos = vdisp.translatePixel(pos, virtDim, bounds);
 

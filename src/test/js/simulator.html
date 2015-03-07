@@ -36,8 +36,11 @@
 	
 var dc2 = document.getElementById("connectiq").getContext("2d");
 var field = new BigHeartField();
-var fieldSimulator = new FieldSimulator(dc2, field, new Rectangle( 0, 0, 640, 480));
+var fieldSimulator = new FieldSimulator(dc2, field, new Rectangle( 10, 10, 620, 450));
 fieldSimulator.update();
+
+window.setInterval("fieldSimulator.update()", 1000);
+
 
 </script>
 
