@@ -12,9 +12,20 @@ class Graphics {
 
 }
 
-Graphics.COLOR_BLACK = "#000000";
 Graphics.COLOR_WHITE = "#FFFFFF";
-
+Graphics.COLOR_LT_GRAY = "#AAAAAA";
+Graphics.COLOR_DK_GRAY = "#555555";
+Graphics.COLOR_BLACK = "#000000";
+Graphics.COLOR_RED = "#FF0000";
+Graphics.COLOR_DK_RED = "#AA0000";
+Graphics.COLOR_ORANGE = "#FF5500";
+Graphics.COLOR_YELLOW = "#FFAA00";
+Graphics.COLOR_GREEN = "#00FF00";
+Graphics.COLOR_DK_GREEN = "#00AA00";
+Graphics.COLOR_BLUE = "#00AAFF";
+Graphics.COLOR_DK_BLUE = "#0000FF";
+Graphics.COLOR_PURPLE = "#AA00FF";
+Graphics.COLOR_PINK = "#FF00FF";
 
 String.prototype.find = function(string) {
 	var index = this.indexOf(string)

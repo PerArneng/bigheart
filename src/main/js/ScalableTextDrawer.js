@@ -170,9 +170,27 @@ class ScalableTextDrawer {
 	}
 
 	
-	/*mc:function*/ draw(dctx, bounds, text) {
-				
+	/*mc:function*/ getColor(heartRate) {
+		var color = Graphics.COLOR_BLACK;
 
+		if (heartRate < 170) {
+			color = Graphics.COLOR_BLACK;
+		} else if (heartRate < 180) {
+			color = Graphics.COLOR_GREEN;
+		} else if (heartRate < 190) {
+			color = Graphics.COLOR_ORANGE;
+		} else if (heartRate < 200) {
+			color = Graphics.COLOR_RED;
+		} else if (heartRate < 210) {
+			color = Graphics.COLOR_PURPLE;
+		}
+
+		return color;
+	}
+
+	/*mc:function*/ draw(dctx, bounds, heartRate) {
+				
+  		var text = "" + heartRate; //mc:var text = Lang.format("$1$", [heartRate]);
 		var charDim = new Dimension(3, 5);
 		var bytesPerChar = 15;		
 
@@ -201,6 +219,7 @@ class ScalableTextDrawer {
 
 				//var poly = createPixelPolygon(targetX,targetY, pixelWidth, pixelHeight , type);
 				if (type > 0) {
+					dctx.setColor(this.getColor(heartRate), Graphics.COLOR_WHITE);
 					dctx.fillRectangle(targetPos.x, targetPos.y, pxDim.width, pxDim.height);
 					//dctx.fillPolygon(poly);
 				}

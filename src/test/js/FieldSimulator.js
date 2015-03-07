@@ -35,12 +35,8 @@ class FieldSimulator {
 	}
 
 	random() {
-
-		var nr = "";
-		for (var i=0;i<3;i++) {
-			nr = nr + Math.floor((Math.random() * 9) + 1)
-		}
-		return parseInt(nr);
+		var val = Math.floor(Math.random() * 60) + 150;
+		return val;
 	}
 
 }
