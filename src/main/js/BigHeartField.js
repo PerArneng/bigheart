@@ -20,7 +20,6 @@ class BigHeartField /*mc:extends WatchUi.DataField*/ {
   	/*mc:function*/ onUpdate(dc) {
   		dc.setColor(Graphics.COLOR_BLACK, Graphics.COLOR_WHITE);
   		dc.clear();
-  		dc.setColor(Graphics.COLOR_BLACK, Graphics.COLOR_WHITE);
   	
   		var hr = 451;
   		if (this.nfo.currentHeartRate != null) {
