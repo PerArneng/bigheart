@@ -1,6 +1,9 @@
 
 class ScalableTextDrawer {
 
+	/*mc:var _chars;*/
+	/*mc:var _font;*/
+
 	constructor() { //mc:function initialize() {
 		this._chars  = ". 1234567890";
 		this._font = [

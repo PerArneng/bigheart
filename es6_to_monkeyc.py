@@ -15,7 +15,7 @@ def main():
     replacements = [
         RegexReplacement(".*//mc:(.*)$", wholeLineReplacement),
         RegexReplacement("(.*)/\*mc:.*\*/(.*)", inPlaceReplacement),
-
+        RegexReplacement(".*this\.[a-zA-Z0-9_]+.*", thisReplacement),
     ]
 
     convert(args.input, args.output, replacements)
@@ -39,6 +39,9 @@ def inPlaceReplacement(match, line):
 
 def wholeLineReplacement(match, line):
     return '%s' % (match.group(1))
+
+def thisReplacement(match, line):
+    return '%s' % (line.replace('this.', ''))
 
 class Replacement:
 
