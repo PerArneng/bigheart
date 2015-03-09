@@ -115,13 +115,13 @@ class ScalableTextDrawer {
 		}
 		
 		if (needle == null) {
-			return haystack.length;
+			return haystack.length/*mc:()*/;
 		}
 
 		var index = haystack.find(needle);
 
 		if (index == null) {
-			return haystack.length;
+			return haystack.length/*mc:()*/;
 		} else {
 			return index;
 		}
@@ -132,10 +132,11 @@ class ScalableTextDrawer {
 	/*mc:function*/ draw(dctx, bounds, heartRate) {
 				
   		var text = "" + heartRate; //mc:var text = Lang.format("$1$", [heartRate]);
+  		var textLength = text.length/*mc:()*/;
 		var charDim = new Dimension(3, 5);
 		var bytesPerChar = 15;		
 
-		var virtDim = new Dimension(text.length * charDim.width + (text.length - 1), 
+		var virtDim = new Dimension(textLength * charDim.width + (textLength - 1), 
 									charDim.height);		
 		var targetDim = bounds.getDimension();
 						
@@ -145,7 +146,7 @@ class ScalableTextDrawer {
 
 		var pxDim = vdisp.pixelDimensions(virtDim, targetDim);
 
-		for (var i=0;i<text.length/*mc:()*/;i++) {
+		for (var i=0;i<textLength;i++) {
 			var chr = text.substring(i, i + 1);
 			var dispCharOffset = this.getOffset(this._chars, chr) * bytesPerChar;
 

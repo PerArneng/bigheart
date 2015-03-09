@@ -41,7 +41,7 @@ def wholeLineReplacement(match, line):
     return '%s' % (match.group(1))
 
 def thisReplacement(match, line):
-    return '%s' % (line.replace('this.', ''))
+    return '%s' % (line.replace('this.', 'self.'))
 
 class Replacement:
 
