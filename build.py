@@ -4,14 +4,22 @@ import fnmatch
 import sys
 import argparse
 
+def get_sdk_folder():
+    folder = os.environ.get('CONNECTIQ_HOME');
+    if folder is None:
+        print "CONNECTIQ_HOME is not set. Set it to point to the SDK home dir"
+        sys.exit(1)
+    return folder;
 
 script_extension = ''
 if os.name == 'nt':
     script_extension = '.bat'
 
-MONKEYC = 'monkeyc' + script_extension
-MONKEYDO = 'monkeydo' + script_extension
-PACKAGER = 'connectiqpkg' + script_extension
+SDK_HOME=get_sdk_folder();
+
+MONKEYC = SDK_HOME + '/bin/' + 'monkeyc' + script_extension
+MONKEYDO = SDK_HOME + '/bin/' + 'monkeydo' + script_extension
+PACKAGER = SDK_HOME + '/bin/' + 'connectiqpkg' + script_extension
 
 BUILD_DIR = os.path.dirname(os.path.abspath(__file__))
 PROGRAM_NAME = os.path.basename(BUILD_DIR)
@@ -26,6 +34,7 @@ BIN_DIR = 'bin'
 
 OUTPUT_FILENAME = os.path.join(BIN_DIR, PROGRAM_NAME + '.prg')
 MANIFEST_FILE = 'manifest.xml'
+
 
 
 def print_command(cmd, title=''):
@@ -133,11 +142,12 @@ if __name__ == '__main__':
  
     if not ret and args.package:
         cmd = [
+            'bash',
             PACKAGER,
-            '-o', '.',
-            '-m', "'%s'" % (MANIFEST_FILE),
+            '-o', BIN_DIR,
+            '-m', "%s" % (MANIFEST_FILE),
             '-n', PROGRAM_NAME,
-            "'%s'" % (OUTPUT_FILENAME)
+            "%s" % (OUTPUT_FILENAME)
         ]
         print_command(cmd, title='Package Command')
         subprocess.call(cmd)
@@ -145,6 +155,7 @@ if __name__ == '__main__':
     # if everything builds correctly, go ahead and try to push to the simulator
     if not ret and not args.no_sim and not args.package:
         cmd = [
+            'bash',
             MONKEYDO,
             "'%s'" % (OUTPUT_FILENAME),
         ]
