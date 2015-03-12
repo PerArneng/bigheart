@@ -42,17 +42,6 @@ QUnit.test( "ScalableTextDrawer::arrayCopy happy", function( assert ) {
 	assert.equal(target[0], 3, "Expected index 3");
 });
 
-QUnit.test( "ScalableTextDrawer::createPixelPolygon happy", function( assert ) {
-
-	var std = new ScalableTextDrawer();
-
-	var poly = std.createPixelPolygon(10, 10, 10, 10, 1);
-
-	assert.equal(poly[0][0], 10, "Expected 10");
-	assert.equal(poly[0][1], 10, "Expected 10");
-
-});
-
 QUnit.test( "VirtualDisplay::pixelDimensions happy", function( assert ) {
 	var vdisp = new VirtualDisplay();
 	var dimensions = vdisp.pixelDimensions(new Dimension(4, 4), new Dimension(100, 100));
