@@ -3,8 +3,10 @@ class ScalableTextDrawer {
 
 	/*mc:var _chars;*/
 	/*mc:var _font;*/
+	/*mc:var log;*/
 
 	constructor() { //mc:function initialize() {
+		this.log = new Log("ScalableTextDrawer");
 		this._chars  = ". 1234567890";
 		this._font = [
 
@@ -23,11 +25,11 @@ class ScalableTextDrawer {
 				0,0,0,
 					
 			//1
-				0,0,1,
-				0,0,1,
-				0,0,1,
-				0,0,1,
-				0,0,1,
+				0,1,0,
+				0,1,0,
+				0,1,0,
+				0,1,0,
+				0,1,0,
 						
 			//2
 				1,1,1,
@@ -159,7 +161,7 @@ class ScalableTextDrawer {
 					var pos = new Point(charPos.x + (i * (charDim.width + 1)), charPos.y);
 
 					var targetPos = vdisp.translatePixel(pos, virtDim, bounds);
-
+					
 					dctx.fillRectangle(targetPos.x, targetPos.y, pxDim.width, pxDim.height);
 				}
 			}

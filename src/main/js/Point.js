@@ -10,4 +10,8 @@ class Point {
 		this.y = y;
 	}
 
+	/*mc:function*/ toString() {
+		return "{ x: " + this.x + ", y: " + this.y + " }";
+	}
+
 }

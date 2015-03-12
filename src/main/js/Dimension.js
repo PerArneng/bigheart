@@ -9,4 +9,8 @@ class Dimension {
 		this.height = height;
 	}
 
+	/*mc:function*/ toString() {
+		return "{ width: " + this.width + ", height: " + this.height + " }";
+	}
+
 }
