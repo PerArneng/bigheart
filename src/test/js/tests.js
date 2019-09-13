@@ -11,7 +11,7 @@ QUnit.test( "ScalableTextDrawer::getOffset happy 2", function( assert ) {
 
 QUnit.test( "ScalableTextDrawer::getOffset not found", function( assert ) {
 	var std = new ScalableTextDrawer();
-	assert.equal(std.getOffset("123", "X"), 3, "Expected index -1")
+	assert.equal(std.getOffset("123", "X"), -1, "Expected index -1")
 });
 
 QUnit.test( "ScalableTextDrawer::getOffset haystack null", function( assert ) {
@@ -82,3 +82,5 @@ QUnit.test( "VirtualDisplay::indexToPos happy", function( assert ) {
 	assert.equal(pos.y, 4, "Expected y 4")
 
 });
+
+

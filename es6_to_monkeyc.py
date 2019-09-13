@@ -10,7 +10,7 @@ def main():
 
     args = parser.parse_args()
 
-    print "es6_to_monkeyc: %s ==> %s" % (args.input, args.output)
+    print("es6_to_monkeyc: %s ==> %s" % (args.input, args.output))
 
     replacements = [
         RegexReplacement(".*//mc:(.*)$", wholeLineReplacement),

@@ -7,7 +7,7 @@ import argparse
 def get_sdk_folder():
     folder = os.environ.get('CONNECTIQ_HOME');
     if folder is None:
-        print "CONNECTIQ_HOME is not set. Set it to point to the SDK home dir"
+        print("CONNECTIQ_HOME is not set. Set it to point to the SDK home dir")
         sys.exit(1)
     return folder;
 
@@ -38,12 +38,12 @@ MANIFEST_FILE = 'manifest.xml'
 
 
 def print_command(cmd, title=''):
-    print
-    print title
-    print '=' * 80
-    print ' '.join(cmd)
-    print '=' * 80
-    print
+    print()
+    print(title)
+    print('=' * 80)
+    print(' '.join(cmd))
+    print('=' * 80)
+    print()
 
 
 def glob_tree(root, pattern=''):
@@ -82,7 +82,7 @@ def convert_to_monkeyc(sources):
         basename = os.path.basename(source)
         basename = basename.replace('.js', '.mc')
         target = "%s/%s" % (TARGET_DIR, basename)
-        cmd = ['python', 'es6_to_monkeyc.py', '-i', source, '-o', target]
+        cmd = ['python3', 'es6_to_monkeyc.py', '-i', source, '-o', target]
         subprocess.call(cmd)    
 
 def convert_to_es5(sources):
@@ -92,7 +92,8 @@ def convert_to_es5(sources):
     for source in sources:
         basename = os.path.basename(source)
         target = "%s/%s" % (TARGET_DIR, basename)
-        cmd = ['babel', '-s', source, '-o', target]
+        #cmd = ['babel', '-s', source, '-o', target]
+        cmd = ['cp', source, target]
         subprocess.call(cmd) 
 
 if __name__ == '__main__':
@@ -110,7 +111,7 @@ if __name__ == '__main__':
     PROGRAM_NAME = args.name
     OUTPUT_FILENAME = os.path.join(BIN_DIR, PROGRAM_NAME + '.prg')
 
-    print "Program Name: %s" % (PROGRAM_NAME)
+    print("Program Name: %s" % (PROGRAM_NAME))
 
     resources = [os.path.relpath(path) for path in glob_tree(RESOURCE_DIR, '*.xml')]
     sources = [os.path.relpath(path) for path in glob_tree(ES6_DIR, '*.js')]
@@ -119,14 +120,14 @@ if __name__ == '__main__':
     if not args.no_clean:
         to_clean = glob_tree(BIN_DIR, '*')
         for f in to_clean:
-            print 'Removing', os.path.relpath(f)
+            print('Removing', os.path.relpath(f))
             os.remove(f)
 
     # clean the target dir first
     if not args.no_clean:
         to_clean = glob_tree(TARGET_DIR, '*')
         for f in to_clean:
-            print 'Removing', os.path.relpath(f)
+            print('Removing', os.path.relpath(f))
             os.remove(f)
 
     convert_to_monkeyc(sources)

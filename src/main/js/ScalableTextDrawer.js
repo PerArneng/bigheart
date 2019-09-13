@@ -120,7 +120,7 @@ class ScalableTextDrawer {
 			return haystack.length/*mc:()*/;
 		}
 
-		var index = haystack.find(needle);
+		var index = haystack.indexOf(needle);
 
 		if (index == null) {
 			return haystack.length/*mc:()*/;
